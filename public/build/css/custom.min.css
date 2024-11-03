@@ -1,0 +1,12 @@
+.toastify.success {
+    background:var(--vz-success);
+}
+.toastify.danger {
+    background:var(--vz-danger);
+}
+.toastify.info {
+    background:var(--vz-info);
+}
+.toastify.warning {
+    background:var(--vz-warning);
+}
