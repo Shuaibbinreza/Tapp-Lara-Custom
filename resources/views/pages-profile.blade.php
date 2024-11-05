@@ -15,7 +15,8 @@
         <div class="row g-4">
             <div class="col-auto">
                 <div class="avatar-lg">
-                    <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}" alt="user-img" class="img-thumbnail rounded-circle" />
+
+                    <img src="@if (Auth::user()->avatar != ''){{ URL::asset('images/' . Auth::user()->avatar) }}@else{{ URL::asset('build/images/users/avatar-1.jpg') }}@endif" alt="user-img" class="img-thumbnail rounded-circle" />
                 </div>
             </div>
             <!--end col-->

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserProfile;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,10 @@ Route::post('/update-password', [App\Http\Controllers\HomeController::class, 'up
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
+Route::post('/form-submit', [UserProfile::class, 'submitForm'])->name('form.submit');
+Route::post('/user-experience', [UserProfile::class, 'experienceForm'])->name('user-experience.store');
+Route::post('/user/avatar/update', [UserProfile::class, 'updateAvatar'])->name('user.avatar.update');
+// Route::get('/pages-profile-settings', [UserProfile::class, 'index'])->name('personalDetails');
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();

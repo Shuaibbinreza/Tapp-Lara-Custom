@@ -3,7 +3,7 @@
     @lang('translation.settings')
 @endsection
 @section('content')
-    
+
 <div class="position-relative mx-n4 mt-n4">
     <div class="profile-wid-bg profile-setting-img">
         <img src="{{ URL::asset('build/images/profile-bg.jpg') }}" class="profile-wid-img" alt="">
@@ -25,19 +25,65 @@
         <div class="card mt-n5">
             <div class="card-body p-4">
                 <div class="text-center">
-                    <div class="profile-user position-relative d-inline-block mx-auto  mb-4">
-                        <img src="{{ URL::asset('build/images/users/avatar-1.jpg') }}" class="rounded-circle avatar-xl img-thumbnail user-profile-image material-shadow" alt="user-profile-image">
-                        <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
-                            <input id="profile-img-file-input" type="file" class="profile-img-file-input">
-                            <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
-                                <span class="avatar-title rounded-circle bg-light text-body material-shadow">
-                                    <i class="ri-camera-fill"></i>
-                                </span>
-                            </label>
+                    {{-- <form id="avatar-upload-form" method="POST" enctype="multipart/form-data" action="{{ route('user.avatar.update') }}"> <!-- Use the appropriate route -->
+                        @csrf
+                        <div class="profile-user position-relative d-inline-block mx-auto mb-1">
+                            <img src="@if (Auth::user()->avatar != ''){{ URL::asset('images/' . Auth::user()->avatar) }}@else{{ URL::asset('build/images/users/avatar-1.jpg') }}@endif" class="rounded-circle avatar-xl img-thumbnail user-profile-image material-shadow" alt="user-profile-image">
+                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                                <input id="profile-img-file-input" type="file" class="profile-img-file-input" name="avatar" accept="image/*">
+                                <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                    <span class="avatar-title rounded-circle bg-light text-body material-shadow">
+                                        <i class="ri-camera-fill"></i>
+                                    </span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <h5 class="fs-16 mb-1">Anna Adame</h5>
-                    <p class="text-muted mb-0">Lead Designer / Developer</p>
+                        <br>
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form> --}}
+
+                    <form id="avatar-upload-form" method="POST" enctype="multipart/form-data" action="{{ route('user.avatar.update') }}">
+                        @csrf
+                        <div class="profile-user position-relative d-inline-block mx-auto mb-1">
+                            <img src="@if (Auth::user()->avatar != ''){{ URL::asset('images/' . Auth::user()->avatar) }}@else{{ URL::asset('build/images/users/avatar-1.jpg') }}@endif" class="rounded-circle avatar-xl img-thumbnail user-profile-image material-shadow" alt="user-profile-image">
+
+                            <div class="avatar-xs p-0 rounded-circle profile-photo-edit">
+                                <input id="profile-img-file-input" type="file" class="profile-img-file-input" name="avatar" accept="image/*">
+                                <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                    <span class="avatar-title rounded-circle bg-light text-body material-shadow">
+                                        <i class="ri-camera-fill"></i>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Bootstrap Modal for Cropping -->
+                        <div class="modal fade" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="cropModalLabel">Crop Image</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="crop-container" class="mb-3"></div> <!-- Container for cropping -->
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="crop-button" class="btn btn-primary">Crop & Preview</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-success mt-2" disabled>Update</button> <!-- Update button -->
+                    </form>
+
+                    <h5 class="fs-16 mb-1 mt-2">{{ $userPersonalDetail->firstnameInput ?? '' }}</h5>
+                    <p class="text-muted mb-0">{{ $userPersonalDetail->designationInput ?? '' }}</p>
                 </div>
             </div>
         </div>
@@ -135,54 +181,61 @@
             <div class="card-body p-4">
                 <div class="tab-content">
                     <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                        <form action="javascript:void(0);">
+                        <form action="{{ route('form.submit') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="firstnameInput" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstnameInput" placeholder="Enter your firstname" value="Dave">
+                                        <input type="text" class="form-control" id="firstnameInput" name="firstnameInput" placeholder="Enter your firstname" value="{{ $userPersonalDetail->firstnameInput ?? '' }}">
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="lastnameInput" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lastnameInput" placeholder="Enter your lastname" value="Adame">
+                                        <input type="text" class="form-control" id="lastnameInput" name="lastnameInput" placeholder="Enter your lastname" value="{{ $userPersonalDetail->lastnameInput ?? '' }}">
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="phonenumberInput" class="form-label">Phone Number</label>
-                                        <input type="text" class="form-control" id="phonenumberInput" placeholder="Enter your phone number" value="+(1) 987 6543">
+                                        <input type="text" class="form-control" id="phonenumberInput" name="phonenumberInput" placeholder="Enter your phone number" value="{{ $userPersonalDetail->phonenumberInput ?? '' }}">
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="emailInput" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" value="daveadame@velzon.com">
+                                        <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Enter your email" value="{{ $userPersonalDetail->emailInput ?? '' }}">
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label for="JoiningdatInput" class="form-label">Joining Date</label>
-                                        <input type="text" class="form-control" data-provider="flatpickr" id="JoiningdatInput" data-date-format="d M, Y" data-deafult-date="24 Nov, 2021" placeholder="Select date" />
+                                        {{-- {{ dd($userPersonalDetail->JoiningdatInput)->format('d M, Y') }} --}}
+                                        {{-- <input type="text" class="form-control" data-provider="flatpickr" id="JoiningdatInput" name="JoiningdatInput" data-date-format="d M, Y" placeholder="Select date" value="{{ optional($userPersonalDetail->JoiningdatInput)->format('d M, Y') ?? '' }}" /> --}}
+                                        <input type="text" class="form-control" data-provider="flatpickr" id="JoiningdatInput" name="JoiningdatInput" data-date-format="d M, Y" placeholder="Select date" value="{{ $userPersonalDetail->JoiningdatInput ?? '' }}" />
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="mb-3">
                                         <label for="skillsInput" class="form-label">Skills</label>
-                                        <select class="form-control" name="skillsInput" data-choices data-choices-text-unique-true multiple id="skillsInput">
-                                            <option value="illustrator">Illustrator</option>
-                                            <option value="photoshop">Photoshop</option>
-                                            <option value="css">CSS</option>
-                                            <option value="html">HTML</option>
-                                            <option value="javascript" selected>Javascript</option>
-                                            <option value="python">Python</option>
-                                            <option value="php">PHP</option>
+                                        @php
+                                            // Convert skills string to an array
+                                            $skillsArray = explode(',', $userPersonalDetail->skillsInput ?? '');
+                                        @endphp
+                                        <select class="form-control" name="skillsInput[]" data-choices data-choices-text-unique-true multiple id="skillsInput">
+                                            <option value="illustrator" {{ in_array('illustrator', $skillsArray) ? 'selected' : '' }}>Illustrator</option>
+                                            <option value="photoshop" {{ in_array('photoshop', $skillsArray) ? 'selected' : '' }}>Photoshop</option>
+                                            <option value="css" {{ in_array('css', $skillsArray) ? 'selected' : '' }}>CSS</option>
+                                            <option value="html" {{ in_array('html', $skillsArray) ? 'selected' : '' }}>HTML</option>
+                                            <option value="javascript" {{ in_array('javascript', $skillsArray) ? 'selected' : '' }}>Javascript</option>
+                                            <option value="python" {{ in_array('python', $skillsArray) ? 'selected' : '' }}>Python</option>
+                                            <option value="php" {{ in_array('php', $skillsArray) ? 'selected' : '' }}>PHP</option>
                                         </select>
                                     </div>
                                 </div>
@@ -190,55 +243,57 @@
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="designationInput" class="form-label">Designation</label>
-                                        <input type="text" class="form-control" id="designationInput" placeholder="Designation" value="Lead Designer / Developer">
+                                        <input type="text" class="form-control" id="designationInput" name="designationInput" placeholder="Designation" value="{{ $userPersonalDetail->designationInput ?? '' }}">
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-6">
                                     <div class="mb-3">
                                         <label for="websiteInput1" class="form-label">Website</label>
-                                        <input type="text" class="form-control" id="websiteInput1" placeholder="www.example.com" value="www.velzon.com" />
+                                        <input type="text" class="form-control" id="websiteInput1" name="websiteInput1" placeholder="www.example.com" value="{{ $userPersonalDetail->websiteInput1 ?? '' }}" />
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label for="cityInput" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="cityInput" placeholder="City" value="California" />
+                                        <input type="text" class="form-control" id="cityInput" name="cityInput" placeholder="City" value="{{ $userPersonalDetail->cityInput ?? '' }}" />
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label for="countryInput" class="form-label">Country</label>
-                                        <input type="text" class="form-control" id="countryInput" placeholder="Country" value="United States" />
+                                        <input type="text" class="form-control" id="countryInput" name="countryInput" placeholder="Country" value="{{ $userPersonalDetail->countryInput ?? '' }}" />
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label for="zipcodeInput" class="form-label">Zip Code</label>
-                                        <input type="text" class="form-control" minlength="5" maxlength="6" id="zipcodeInput" placeholder="Enter zipcode" value="90011">
+                                        <input type="text" class="form-control" minlength="5" maxlength="6" id="zipcodeInput" name="zipcodeInput" placeholder="Enter zipcode" value="{{ $userPersonalDetail->zipcodeInput ?? '' }}">
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="mb-3 pb-2">
-                                        <label for="exampleFormControlTextarea" class="form-label">Description</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea" placeholder="Enter your description" rows="3">Hi I'm Anna Adame,It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is European languages are members of the same family.</textarea>
+                                        <label for="descriptionInput" class="form-label">Description</label>
+                                        <textarea class="form-control" id="descriptionInput" name="descriptionInput" placeholder="Enter your description" rows="3">{{ $userPersonalDetail->description ?? '' }}</textarea>
                                     </div>
                                 </div>
                                 <!--end col-->
                                 <div class="col-lg-12">
                                     <div class="hstack gap-2 justify-content-end">
                                         <button type="submit" class="btn btn-primary">Updates</button>
-                                        <button type="button" class="btn btn-soft-success">Cancel</button>
+                                        <a href="pages-profile" type="button" class="btn btn-soft-success">Cancel</a>
                                     </div>
                                 </div>
                                 <!--end col-->
                             </div>
                             <!--end row-->
                         </form>
+
+
                     </div>
                     <!--end tab-pane-->
                     <div class="tab-pane" id="changePassword" role="tabpanel">
@@ -345,110 +400,78 @@
                     </div>
                     <!--end tab-pane-->
                     <div class="tab-pane" id="experience" role="tabpanel">
-                        <form>
+                        <form method="POST" action="/user-experience">
+                            @csrf
                             <div id="newlink">
-                                <div id="1">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label for="jobTitle" class="form-label">Job Title</label>
-                                                <input type="text" class="form-control" id="jobTitle" placeholder="Job title" value="Lead Designer / Developer">
-                                            </div>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label for="companyName" class="form-label">Company Name</label>
-                                                <input type="text" class="form-control" id="companyName" placeholder="Company name" value="Themesbrand">
-                                            </div>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label for="experienceYear" class="form-label">Experience Years</label>
-                                                <div class="row">
-                                                    <div class="col-lg-5">
-                                                        <select class="form-control" data-choices data-choices-search-false name="experienceYear" id="experienceYear">
-                                                            <option value="">Select years</option>
-                                                            <option value="Choice 1">2001</option>
-                                                            <option value="Choice 2">2002</option>
-                                                            <option value="Choice 3">2003</option>
-                                                            <option value="Choice 4">2004</option>
-                                                            <option value="Choice 5">2005</option>
-                                                            <option value="Choice 6">2006</option>
-                                                            <option value="Choice 7">2007</option>
-                                                            <option value="Choice 8">2008</option>
-                                                            <option value="Choice 9">2009</option>
-                                                            <option value="Choice 10">2010</option>
-                                                            <option value="Choice 11">2011</option>
-                                                            <option value="Choice 12">2012</option>
-                                                            <option value="Choice 13">2013</option>
-                                                            <option value="Choice 14">2014</option>
-                                                            <option value="Choice 15">2015</option>
-                                                            <option value="Choice 16">2016</option>
-                                                            <option value="Choice 17" selected>2017</option>
-                                                            <option value="Choice 18">2018</option>
-                                                            <option value="Choice 19">2019</option>
-                                                            <option value="Choice 20">2020</option>
-                                                            <option value="Choice 21">2021</option>
-                                                            <option value="Choice 22">2022</option>
-                                                        </select>
+                                @if (count($experiences) > 0)
+                                    @foreach($experiences as $index => $experience)
+                                        <div id="{{ $index + 1 }}">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="jobTitle{{ $index }}" class="form-label">Job Title</label>
+                                                        <input type="text" class="form-control" name="job_title[]" id="jobTitle{{ $index }}" placeholder="Job title" value="{{ $experience->job_title }}">
                                                     </div>
-                                                    <!--end col-->
-                                                    <div class="col-auto align-self-center">
-                                                        to
-                                                    </div>
-                                                    <!--end col-->
-                                                    <div class="col-lg-5">
-                                                        <select class="form-control" data-choices data-choices-search-false name="choices-single-default2">
-                                                            <option value="">Select years</option>
-                                                            <option value="Choice 1">2001</option>
-                                                            <option value="Choice 2">2002</option>
-                                                            <option value="Choice 3">2003</option>
-                                                            <option value="Choice 4">2004</option>
-                                                            <option value="Choice 5">2005</option>
-                                                            <option value="Choice 6">2006</option>
-                                                            <option value="Choice 7">2007</option>
-                                                            <option value="Choice 8">2008</option>
-                                                            <option value="Choice 9">2009</option>
-                                                            <option value="Choice 10">2010</option>
-                                                            <option value="Choice 11">2011</option>
-                                                            <option value="Choice 12">2012</option>
-                                                            <option value="Choice 13">2013</option>
-                                                            <option value="Choice 14">2014</option>
-                                                            <option value="Choice 15">2015</option>
-                                                            <option value="Choice 16">2016</option>
-                                                            <option value="Choice 17">2017</option>
-                                                            <option value="Choice 18">2018</option>
-                                                            <option value="Choice 19">2019</option>
-                                                            <option value="Choice 20" selected>2020</option>
-                                                            <option value="Choice 21">2021</option>
-                                                            <option value="Choice 22">2022</option>
-                                                        </select>
-                                                    </div>
-                                                    <!--end col-->
                                                 </div>
-                                                <!--end row-->
+                                                <!--end col-->
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="companyName{{ $index }}" class="form-label">Company Name</label>
+                                                        <input type="text" class="form-control" name="company_name[]" id="companyName{{ $index }}" placeholder="Company name" value="{{ $experience->company_name }}">
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="experienceYear{{ $index }}" class="form-label">Experience Years</label>
+                                                        <div class="row">
+                                                            <div class="col-lg-5">
+                                                                <select class="form-control" data-choices data-choices-search-false name="experience_start_year[]">
+                                                                    <option value="">Select years</option>
+                                                                    @foreach(range(2001, 2022) as $year)
+                                                                        <option value="{{ $year }}" {{ $year == $experience->experience_start_year ? 'selected' : '' }}>{{ $year }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-auto align-self-center">to</div>
+                                                            <!--end col-->
+                                                            <div class="col-lg-5">
+                                                                <select class="form-control" data-choices data-choices-search-false name="experience_end_year[]">
+                                                                    <option value="">Select years</option>
+                                                                    @foreach(range(2001, 2022) as $year)
+                                                                        <option value="{{ $year }}" {{ $year == $experience->experience_end_year ? 'selected' : '' }}>{{ $year }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="jobDescription{{ $index }}" class="form-label">Job Description</label>
+                                                        <textarea class="form-control" name="job_description[]" id="jobDescription{{ $index }}" rows="3" placeholder="Enter description">{{ $experience->job_description }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                                <div class="hstack gap-2 justify-content-end">
+                                                    <a class="btn btn-success" href="javascript:deleteEl({{ $index + 1 }})">Delete</a>
+                                                </div>
+                                                <!-- Hidden field for experience ID -->
+                                                {{-- <input type="hidden" name="experience_id[]" value="{{ $experience->id }}"> --}}
                                             </div>
+                                            <!--end row-->
                                         </div>
-                                        <!--end col-->
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label for="jobDescription" class="form-label">Job Description</label>
-                                                <textarea class="form-control" id="jobDescription" rows="3" placeholder="Enter description">You always want to make sure that your fonts work well together and try to limit the number of fonts you use to three or less. Experiment and play around with the fonts that you already have in the software you're working with reputable font websites. </textarea>
-                                            </div>
-                                        </div>
-                                        <!--end col-->
-                                        <div class="hstack gap-2 justify-content-end">
-                                            <a class="btn btn-success" href="javascript:deleteEl(1)">Delete</a>
-                                        </div>
-                                    </div>
-                                    <!--end row-->
-                                </div>
+                                    @endforeach
+                                @else
+                                    <p>No Experience Yet. Click add new</p>
+                                @endif
                             </div>
-                            <div id="newForm" style="display: none;">
 
-                            </div>
+                            <div id="newForm" style="display: none;"></div>
                             <div class="col-lg-12">
                                 <div class="hstack gap-2">
                                     <button type="submit" class="btn btn-success">Update</button>
@@ -457,6 +480,7 @@
                             </div>
                             <!--end col-->
                         </form>
+
                     </div>
                     <!--end tab-pane-->
                     <div class="tab-pane" id="privacy" role="tabpanel">

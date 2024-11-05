@@ -124,11 +124,12 @@
                     <div class="collapse menu-dropdown" id="sidebarApps">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#sidebarCalendar" class="nav-link" data-bs-toggle="collapse" role="button"
+                                <a href="apps-chat" class="nav-link" role="button"
                                     aria-expanded="false" aria-controls="sidebarCalendar" data-key="t-calender">
-                                    @lang('translation.calendar')
+                                    {{-- @lang('translation.calendar') --}}
+                                    Summarizer
                                 </a>
-                                <div class="collapse menu-dropdown" id="sidebarCalendar">
+                                {{-- <div class="collapse menu-dropdown" id="sidebarCalendar">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
                                             <a href="apps-calendar" class="nav-link"> @lang('translation.main-calender') </a>
@@ -138,44 +139,42 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </li>
+
                             <li class="nav-item">
-                                <a href="apps-chat" class="nav-link">@lang('translation.chat')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button"
-                                    aria-expanded="false" aria-controls="sidebarEmail">
-                                    @lang('translation.email')
+                                <a href="invoice1" class="nav-link" role="button"
+                                    aria-expanded="false" aria-controls="sidebarCalendar" data-key="t-calender">
+                                    {{-- @lang('translation.calendar') --}}
+                                    Invoice
                                 </a>
-                                <div class="collapse menu-dropdown" id="sidebarEmail">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="apps-mailbox" class="nav-link">@lang('translation.mailbox')</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#sidebaremailTemplates" class="nav-link"
-                                                data-bs-toggle="collapse" role="button" aria-expanded="false"
-                                                aria-controls="sidebaremailTemplates">
-                                                @lang('translation.email-templates')
-                                            </a>
-                                            <div class="collapse menu-dropdown" id="sidebaremailTemplates">
-                                                <ul class="nav nav-sm flex-column">
-                                                    <li class="nav-item">
-                                                        <a href="apps-email-basic" class="nav-link">
-                                                            @lang('translation.basic-action') </a>
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="apps-email-ecommerce" class="nav-link">
-                                                            @lang('translation.ecommerce-action') </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
+
                             <li class="nav-item">
+                                <a href="certificate" class="nav-link" role="button"
+                                    aria-expanded="false" aria-controls="sidebarCalendar" data-key="t-calender">
+                                    {{-- @lang('translation.calendar') --}}
+                                    Certificate
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="proposal-making" class="nav-link" role="button"
+                                    aria-expanded="false" aria-controls="sidebarCalendar" data-key="t-calender">
+                                    {{-- @lang('translation.calendar') --}}
+                                    Make Proposal
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="itt-upload" class="nav-link" role="button"
+                                    aria-expanded="false" aria-controls="sidebarCalendar" data-key="t-calender">
+                                    {{-- @lang('translation.calendar') --}}
+                                    Image to Text
+                                </a>
+                            </li>
+
+                            {{-- <li class="nav-item">
                                 <a href="#sidebarEcommerce" class="nav-link" data-bs-toggle="collapse"
                                     role="button" aria-expanded="false"
                                     aria-controls="sidebarEcommerce">@lang('translation.ecommerce')
@@ -320,8 +319,8 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
-                            <li class="nav-item">
+                            </li> --}}
+                            {{-- <li class="nav-item">
                                 <a href="#sidebarTickets" class="nav-link" data-bs-toggle="collapse" role="button"
                                     aria-expanded="false" aria-controls="sidebarTickets">@lang('translation.supprt-tickets')
                                 </a>
@@ -375,8 +374,8 @@
                             </li>
                             <li class="nav-item">
                                 <a href="apps-file-manager" class="nav-link"> <span>@lang('translation.file-manager')</span></a>
-                            </li>
-                            <li class="nav-item">
+                            </li> --}}
+                            {{-- <li class="nav-item">
                                 <a href="apps-todo" class="nav-link"> <span>@lang('translation.to-do')</span></a>
                             </li>
                             <li class="nav-item">
@@ -447,7 +446,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="apps-api-key" class="nav-link"> @lang('translation.api-key')</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>

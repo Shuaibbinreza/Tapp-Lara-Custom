@@ -7,45 +7,44 @@
 @endsection
 @section('content')
     <div class="chat-wrapper d-lg-flex gap-1 mx-n4 mt-n4 p-1">
-        <div class="chat-leftsidebar minimal-border">
-            <div class="px-4 pt-4 mb-3">
+        <div class="chat-leftsidebar minimal-border d-none">
+            <div class="px-4 pt-4 mb-0">
                 <div class="d-flex align-items-start">
                     <div class="flex-grow-1">
-                        <h5 class="mb-4">Chats</h5>
+                        <h5 class="mb-4">Summarizer</h5>
                     </div>
                     <div class="flex-shrink-0">
                         <div data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="bottom" title="Add Contact">
-
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-soft-success btn-sm material-shadow-none">
-                                <i class="ri-add-line align-bottom"></i>
+                            <button type="button" class="btn btn-soft-success btn-sm material-shadow-none text-dark">
+                                Upload File <i class="ri-add-line align-bottom"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="search-box">
+                {{-- <div class="search-box">
                     <input type="text" class="form-control bg-light border-light" placeholder="Search here...">
                     <i class="ri-search-2-line search-icon"></i>
-                </div>
+                </div> --}}
             </div> <!-- .p-4 -->
 
             <ul class="nav nav-tabs nav-tabs-custom nav-success nav-justified" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" data-bs-toggle="tab" href="#chats" role="tab">
-                        Chats
+                        Today's Uploaded Files
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="tab" href="#contacts" role="tab">
                         Contacts
                     </a>
-                </li>
+                </li> --}}
             </ul>
 
             <div class="tab-content text-muted">
                 <div class="tab-pane active" id="chats" role="tabpanel">
                     <div class="chat-room-list pt-3" data-simplebar>
-                        <div class="d-flex align-items-center px-4 mb-2">
+                        {{-- <div class="d-flex align-items-center px-4 mb-2">
                             <div class="flex-grow-1">
                                 <h4 class="mb-0 fs-11 text-muted text-uppercase">Direct Messages</h4>
                             </div>
@@ -59,7 +58,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="chat-message-list">
 
@@ -68,7 +67,7 @@
                             </ul>
                         </div>
 
-                        <div class="d-flex align-items-center px-4 mt-4 pt-2 mb-2">
+                        <div class="d-flex align-items-center px-4 mt-4 pt-2 mb-2 d-none">
                             <div class="flex-grow-1">
                                 <h4 class="mb-0 fs-11 text-muted text-uppercase">Channels</h4>
                             </div>
@@ -83,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div class="chat-message-list">
+                        <div class="chat-message-list d-none">
 
                             <ul class="list-unstyled chat-list chat-user-list mb-0" id="channelList">
                             </ul>
@@ -91,6 +90,7 @@
                         <!-- End chat-message-list -->
                     </div>
                 </div>
+
                 <div class="tab-pane" id="contacts" role="tabpanel">
                     <div class="chat-room-list pt-3" data-simplebar>
                         <div class="sort-contact">
@@ -99,6 +99,162 @@
                 </div>
             </div>
             <!-- end tab contact -->
+        </div>
+
+        <div class="email-menu-sidebar minimal-border">
+            <div class="p-4 d-flex flex-column h-100">
+                <div class="pb-4 border-bottom border-bottom-dashed">
+                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#composemodal"><i
+                            data-feather="plus-circle" class="icon-xs me-1 icon-dual-light"></i> Compose</button>
+                </div>
+
+                <div class="mx-n4 px-4 email-menu-sidebar-scroll" data-simplebar>
+                    <div class="mail-list mt-3">
+                        <a href="#" class="active"><i class="ri-mail-fill me-3 align-middle fw-medium"></i> <span
+                                class="mail-list-link">Microsoft TIN Certificate BD</span> <span
+                                class="badge bg-success-subtle text-success ms-auto  ">5</span></a>
+                        <a href="#"><i class="ri-inbox-archive-fill me-3 align-middle fw-medium"></i> <span
+                                class="mail-list-link">Google IPO Certificate</span> <span
+                                class="badge bg-success-subtle text-success ms-auto  ">5</span></a>
+                        <a href="#"><i class="ri-send-plane-2-fill me-3 align-middle fw-medium"></i><span
+                                class="mail-list-link">Sent</span></a>
+                        <a href="#"><i class="ri-edit-2-fill me-3 align-middle fw-medium"></i><span
+                                class="mail-list-link">Draft</span></a>
+                        <a href="#"><i class="ri-error-warning-fill me-3 align-middle fw-medium"></i><span
+                                class="mail-list-link">Spam</span></a>
+                        <a href="#"><i class="ri-delete-bin-5-fill me-3 align-middle fw-medium"></i><span
+                                class="mail-list-link">Trash</span></a>
+                        <a href="#"><i class="ri-star-fill me-3 align-middle fw-medium"></i><span
+                                class="mail-list-link">Starred</span></a>
+                        <a href="#"><i class="ri-price-tag-3-fill me-3 align-middle fw-medium"></i><span
+                                class="mail-list-link">Important</span></a>
+
+                                <a href="#" class="active"><i class="ri-mail-fill me-3 align-middle fw-medium"></i> <span
+                                    class="mail-list-link">Microsoft TIN Certificate BD</span> <span
+                                    class="badge bg-success-subtle text-success ms-auto  ">5</span></a>
+                            <a href="#"><i class="ri-inbox-archive-fill me-3 align-middle fw-medium"></i> <span
+                                    class="mail-list-link">Google IPO Certificate</span> <span
+                                    class="badge bg-success-subtle text-success ms-auto  ">5</span></a>
+                            <a href="#"><i class="ri-send-plane-2-fill me-3 align-middle fw-medium"></i><span
+                                    class="mail-list-link">Sent</span></a>
+                            <a href="#"><i class="ri-edit-2-fill me-3 align-middle fw-medium"></i><span
+                                    class="mail-list-link">Draft</span></a>
+                            <a href="#"><i class="ri-error-warning-fill me-3 align-middle fw-medium"></i><span
+                                    class="mail-list-link">Spam</span></a>
+                            <a href="#"><i class="ri-delete-bin-5-fill me-3 align-middle fw-medium"></i><span
+                                    class="mail-list-link">Trash</span></a>
+                            <a href="#"><i class="ri-star-fill me-3 align-middle fw-medium"></i><span
+                                    class="mail-list-link">Starred</span></a>
+                            <a href="#"><i class="ri-price-tag-3-fill me-3 align-middle fw-medium"></i><span
+                                    class="mail-list-link">Important</span></a>
+
+                                    <a href="#" class="active"><i class="ri-mail-fill me-3 align-middle fw-medium"></i> <span
+                                        class="mail-list-link">Microsoft TIN Certificate BD</span> <span
+                                        class="badge bg-success-subtle text-success ms-auto  ">5</span></a>
+                                <a href="#"><i class="ri-inbox-archive-fill me-3 align-middle fw-medium"></i> <span
+                                        class="mail-list-link">Google IPO Certificate</span> <span
+                                        class="badge bg-success-subtle text-success ms-auto  ">5</span></a>
+                                <a href="#"><i class="ri-send-plane-2-fill me-3 align-middle fw-medium"></i><span
+                                        class="mail-list-link">Sent</span></a>
+                                <a href="#"><i class="ri-edit-2-fill me-3 align-middle fw-medium"></i><span
+                                        class="mail-list-link">Draft</span></a>
+                                <a href="#"><i class="ri-error-warning-fill me-3 align-middle fw-medium"></i><span
+                                        class="mail-list-link">Spam</span></a>
+                                <a href="#"><i class="ri-delete-bin-5-fill me-3 align-middle fw-medium"></i><span
+                                        class="mail-list-link">Trash</span></a>
+                                <a href="#"><i class="ri-star-fill me-3 align-middle fw-medium"></i><span
+                                        class="mail-list-link">Starred</span></a>
+                                <a href="#"><i class="ri-price-tag-3-fill me-3 align-middle fw-medium"></i><span
+                                        class="mail-list-link">Important</span></a>
+                    </div>
+
+
+                    {{-- <div>
+                        <h5 class="fs-12 text-uppercase text-muted mt-4">Labels</h5>
+
+                        <div class="mail-list mt-1">
+                            <a href="#"><span class="ri-checkbox-blank-circle-line me-2 text-info"></span><span
+                                    class="mail-list-link" data-type="label">Support</span> <span
+                                    class="badge bg-success-subtle text-success ms-auto">3</span></a>
+                            <a href="#"><span class="ri-checkbox-blank-circle-line me-2 text-warning"></span><span
+                                    class="mail-list-link" data-type="label">Freelance</span></a>
+                            <a href="#"><span class="ri-checkbox-blank-circle-line me-2 text-primary"></span><span
+                                    class="mail-list-link" data-type="label">Social</span></a>
+                            <a href="#"><span class="ri-checkbox-blank-circle-line me-2 text-danger"></span><span
+                                    class="mail-list-link" data-type="label">Friends</span><span
+                                    class="badge bg-success-subtle text-success ms-auto">2</span></a>
+                            <a href="#"><span class="ri-checkbox-blank-circle-line me-2 text-success"></span><span
+                                    class="mail-list-link" data-type="label">Family</span></a>
+                        </div>
+                    </div>
+
+                    <div class="border-top border-top-dashed pt-3 mt-3">
+                        <a href="#"
+                            class="btn btn-icon btn-sm btn-soft-info rounded-pill float-end material-shadow-none"><i
+                                class="bx bx-plus fs-16"></i></a>
+                        <h5 class="fs-12 text-uppercase text-muted mb-3">Chat</h5>
+
+                        <div class="mt-2 vstack email-chat-list mx-n4">
+                            <a href="javascript: void(0);" class="d-flex align-items-center active">
+                                <div class="flex-shrink-0 me-2 avatar-xxs chatlist-user-image">
+                                    <img class="img-fluid rounded-circle" src="{{ URL::asset('build/images/users/avatar-2.jpg') }}"
+                                        alt="">
+                                </div>
+
+                                <div class="flex-grow-1 chat-user-box overflow-hidden">
+                                    <h5 class="fs-13 text-truncate mb-0 chatlist-user-name">Scott Median</h5>
+                                    <small class="text-muted text-truncate mb-0">Hello ! are you there?</small>
+                                </div>
+                            </a>
+
+                            <a href="javascript: void(0);" class="d-flex align-items-center">
+                                <div class="flex-shrink-0 me-2 avatar-xxs chatlist-user-image">
+                                    <img class="img-fluid rounded-circle" src="{{ URL::asset('build/images/users/avatar-4.jpg') }}"
+                                        alt="">
+                                </div>
+
+                                <div class="flex-grow-1 chat-user-box overflow-hidden">
+                                    <h5 class="fs-13 text-truncate mb-0 chatlist-user-name">Julian Rosa</h5>
+                                    <small class="text-muted text-truncate mb-0">What about our next..</small>
+                                </div>
+                            </a>
+
+                            <a href="javascript: void(0);" class="d-flex align-items-center">
+                                <div class="flex-shrink-0 me-2 avatar-xxs chatlist-user-image">
+                                    <img class="img-fluid rounded-circle" src="{{ URL::asset('build/images/users/avatar-3.jpg') }}"
+                                        alt="">
+                                </div>
+
+                                <div class="flex-grow-1 chat-user-box overflow-hidden">
+                                    <h5 class="fs-13 text-truncate mb-0 chatlist-user-name">David Medina</h5>
+                                    <small class="text-muted text-truncate mb-0">Yeah everything is fine</small>
+                                </div>
+                            </a>
+
+                            <a href="javascript: void(0);" class="d-flex align-items-center">
+                                <div class="flex-shrink-0 me-2 avatar-xxs chatlist-user-image">
+                                    <img class="img-fluid rounded-circle" src="{{ URL::asset('build/images/users/avatar-5.jpg') }}"
+                                        alt="">
+                                </div>
+
+                                <div class="flex-grow-1 chat-user-box overflow-hidden">
+                                    <h5 class="fs-13 text-truncate mb-0 chatlist-user-name">Jay Baker</h5>
+                                    <small class="text-muted text-truncate mb-0">Wow that's great</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div> --}}
+                </div>
+
+                <div class="mt-auto">
+                    <h5 class="fs-13">1 out of 10 Document Used</h5>
+                    <div class="progress progress-sm">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!-- end chat leftsidebar -->
         <!-- Start User chat -->
@@ -133,14 +289,13 @@
                                                                 data-bs-toggle="offcanvas" href="#userProfileCanvasExample"
                                                                 aria-controls="userProfileCanvasExample">Lisa Parker</a>
                                                         </h5>
-                                                        <p class="text-truncate text-muted fs-14 mb-0 userStatus">
-                                                            <small>Online</small></p>
+                                                        {{-- <p class="text-truncate text-muted fs-14 mb-0 userStatus"><small>Online</small></p> --}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-8 col-4">
+                                    <div class="col-sm-8 col-4 d-none">
                                         <ul class="list-inline user-chat-nav text-end mb-0">
                                             <li class="list-inline-item m-0">
                                                 <div class="dropdown">
@@ -675,12 +830,89 @@
         <!--end offcanvas-body-->
     </div>
     <!--end offcanvas-->
+
+    <!-- Compose Modal -->
+    <div class="modal fade" id="composemodal" tabindex="-1" role="dialog" aria-labelledby="composemodalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-3 bg-light">
+                    <h5 class="modal-title" id="composemodalTitle">New Message</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="mb-3 position-relative">
+                            <input type="text" class="form-control email-compose-input" data-choices
+                                data-choices-limit="15" value="support@themesbrand.com" data-choices-removeItem
+                                placeholder="To">
+                            <div class="position-absolute top-0 end-0">
+                                <div class="d-flex">
+                                    <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#CcRecipientsCollapse"
+                                        aria-expanded="false" aria-controls="CcRecipientsCollapse">
+                                        Cc
+                                    </button>
+                                    <button class="btn btn-link text-reset fw-semibold px-2" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#BccRecipientsCollapse"
+                                        aria-expanded="false" aria-controls="BccRecipientsCollapse">
+                                        Bcc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse" id="CcRecipientsCollapse">
+                            <div class="mb-3">
+                                <label>Cc:</label>
+                                <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                    data-choices-removeItem placeholder="Cc recipients">
+                            </div>
+                        </div>
+                        <div class="collapse" id="BccRecipientsCollapse">
+                            <div class="mb-3">
+                                <label>Bcc:</label>
+                                <input type="text" class="form-control" data-choices data-choices-limit="15"
+                                    data-choices-removeItem placeholder="Bcc recipients">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+                        <div class="ck-editor-reverse">
+                            <div id="email-editor"></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost-danger" data-bs-dismiss="modal">Discard</button>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success">Send</button>
+                        <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i
+                                        class="ri-timer-line text-muted me-1 align-bottom"></i> Schedule Send</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal -->
 @endsection
 @section('script')
     <script src="{{ URL::asset('build/libs/glightbox/js/glightbox.min.js') }}"></script>
 
     <!-- fgEmojiPicker js -->
     <script src="{{ URL::asset('build/libs/fg-emoji-picker/fgEmojiPicker.js') }}"></script>
+    {{-- <script src="{{ URL::asset('build/js/pages/profile-setting.init.js') }}"></script> --}}
+    <script src="{{ URL::asset('build/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    <script src="{{ URL::asset('build/js/pages/mailbox.init.js') }}"></script>
 
     <!-- chat init js -->
     <script src="{{ URL::asset('build/js/pages/chat.init.js') }}"></script>

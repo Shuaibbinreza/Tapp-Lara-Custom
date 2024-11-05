@@ -64,84 +64,85 @@ function new_link() {
     div1.id = count;
 
     var delLink = '<div class="row"><div class="col-lg-12">' +
-        '<div class="mb-3">' +
-        '<label for="jobTitle1" class="form-label">Job Title</label>' +
-        '<input type="text" class="form-control" id="jobTitle1" placeholder="Job title">' +
-        '</div></div>' +
-        '<div class="col-lg-6">' +
-        '<div class="mb-3">' +
-        '<label for="companyName" class="form-label">Company Name</label>' +
-        '<input type="text" class="form-control" id="companyName" placeholder="Company name">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-lg-6">' +
-        '<div class="mb-3">' +
-        '<label for="choices-single-default3" class="form-label">Experience Years</label>' +
-        '<div class="row">' +
-        '<div class="col-lg-5">' +
-        '<select class="form-control" data-trigger name="choices-single-default3"> ' +
-        '<option value="">Select years</option>' +
-        '<option value="Choice 1">2001</option>' +
-        '<option value="Choice 2">2002</option>' +
-        '<option value="Choice 3">2003</option>' +
-        '<option value="Choice 4">2004</option>' +
-        '<option value="Choice 5">2005</option>' +
-        '<option value="Choice 6">2006</option>' +
-        '<option value="Choice 7">2007</option>' +
-        '<option value="Choice 8">2008</option>' +
-        '<option value="Choice 9">2009</option>' +
-        '<option value="Choice 10">2010</option>' +
-        '<option value="Choice 11">2011</option>' +
-        '<option value="Choice 12">2012</option>' +
-        '<option value="Choice 13">2013</option>' +
-        '<option value="Choice 14">2014</option>' +
-        '<option value="Choice 15">2015</option>' +
-        '<option value="Choice 16">2016</option>' +
-        '<option value="Choice 17">2017</option>' +
-        '<option value="Choice 18">2018</option>' +
-        '<option value="Choice 19">2019</option>' +
-        '<option value="Choice 20">2020</option>' +
-        '<option value="Choice 21">2021</option>' +
-        '<option value="Choice 22">2022</option>' +
-        '</select>' +
-        '</div>' +
-        '<div class="col-auto align-self-center">to</div>' +
-        '<div class="col-lg-5">' +
-        '<select class="form-control" data-trigger  name="choices-single-default2">' +
-        '<option value="">Select years</option>' +
-        '<option value="Choice 1">2001</option>' +
-        '<option value="Choice 2">2002</option>' +
-        '<option value="Choice 3">2003</option>' +
-        '<option value="Choice 4">2004</option>' +
-        '<option value="Choice 5">2005</option>' +
-        '<option value="Choice 6">2006</option>' +
-        '<option value="Choice 7">2007</option>' +
-        '<option value="Choice 8">2008</option>' +
-        '<option value="Choice 9">2009</option>' +
-        '<option value="Choice 10">2010</option>' +
-        '<option value="Choice 11">2011</option>' +
-        '<option value="Choice 12">2012</option>' +
-        '<option value="Choice 13">2013</option>' +
-        '<option value="Choice 14">2014</option>' +
-        '<option value="Choice 15">2015</option>' +
-        '<option value="Choice 16">2016</option>' +
-        '<option value="Choice 17">2017</option>' +
-        '<option value="Choice 18">2018</option>' +
-        '<option value="Choice 19">2019</option>' +
-        '<option value="Choice 20">2020</option>' +
-        '<option value="Choice 21">2021</option>' +
-        '<option value="Choice 22">2022</option>' +
-        '</select></div></div></div></div>' +
-        '<div class="col-lg-12">' +
-        '<div class="mb-3">' +
-        '<label for="jobDescription" class="form-label">Job Description</label>' +
-        '<textarea class="form-control" id="jobDescription" rows="3" placeholder="Enter description"></textarea>' +
-        '</div></div><div class="hstack gap-2 justify-content-end"><a class="btn btn-success" href="javascript:deleteEl(' + count + ')">Delete</a></div></div>';
+    '<div class="mb-3">' +
+    '<label for="jobTitle1" class="form-label">Job Title</label>' +
+    '<input type="text" class="form-control" name="job_title[]" id="jobTitle1" placeholder="Job title">' +
+    '</div></div>' +
+    '<div class="col-lg-6">' +
+    '<div class="mb-3">' +
+    '<label for="companyName" class="form-label">Company Name</label>' +
+    '<input type="text" class="form-control" name="company_name[]" id="companyName" placeholder="Company name">' +
+    '</div>' +
+    '</div>' +
+    '<div class="col-lg-6">' +
+    '<div class="mb-3">' +
+    '<label for="choices-single-default3" class="form-label">Experience Years</label>' +
+    '<div class="row">' +
+    '<div class="col-lg-5">' +
+    '<select class="form-control" data-trigger name="experience_start_year[]"> ' +
+    '<option value="">Select years</option>' +
+    '<option value="2001">2001</option>' +
+    '<option value="2003">2002</option>' +
+    '<option value="2003">2003</option>' +
+    '<option value="2004">2004</option>' +
+    '<option value="2005">2005</option>' +
+    '<option value="2006">2006</option>' +
+    '<option value="2007">2007</option>' +
+    '<option value="2008">2008</option>' +
+    '<option value="2009">2009</option>' +
+    '<option value="20010">2010</option>' +
+    '<option value="2011">2011</option>' +
+    '<option value="2012">2012</option>' +
+    '<option value="2013">2013</option>' +
+    '<option value="2014">2014</option>' +
+    '<option value="2015">2015</option>' +
+    '<option value="2016">2016</option>' +
+    '<option value="2017">2017</option>' +
+    '<option value="2018">2018</option>' +
+    '<option value="2019">2019</option>' +
+    '<option value="2020">2020</option>' +
+    '<option value="2021">2021</option>' +
+    '<option value="2022">2022</option>' +
+    '</select>' +
+    '</div>' +
+    '<div class="col-auto align-self-center">to</div>' +
+    '<div class="col-lg-5">' +
+    '<select class="form-control" data-trigger name="experience_end_year[]">' +
+    '<option value="">Select years</option>' +
+    '<option value="2001">2001</option>' +
+    '<option value="2003">2002</option>' +
+    '<option value="2003">2003</option>' +
+    '<option value="2004">2004</option>' +
+    '<option value="2005">2005</option>' +
+    '<option value="2006">2006</option>' +
+    '<option value="2007">2007</option>' +
+    '<option value="2008">2008</option>' +
+    '<option value="2009">2009</option>' +
+    '<option value="20010">2010</option>' +
+    '<option value="2011">2011</option>' +
+    '<option value="2012">2012</option>' +
+    '<option value="2013">2013</option>' +
+    '<option value="2014">2014</option>' +
+    '<option value="2015">2015</option>' +
+    '<option value="2016">2016</option>' +
+    '<option value="2017">2017</option>' +
+    '<option value="2018">2018</option>' +
+    '<option value="2019">2019</option>' +
+    '<option value="2020">2020</option>' +
+    '<option value="2021">2021</option>' +
+    '<option value="2022">2022</option>' +
+    '</select></div></div></div></div>' +
+    '<div class="col-lg-12">' +
+    '<div class="mb-3">' +
+    '<label for="jobDescription" class="form-label">Job Description</label>' +
+    '<textarea class="form-control" name="job_description[]" id="jobDescription" rows="3" placeholder="Enter description"></textarea>' +
+    '</div></div><div class="hstack gap-2 justify-content-end"><a class="btn btn-success" href="javascript:deleteEl(' + count + ')">Delete</a></div></div>';
+
 
     div1.innerHTML = document.getElementById('newForm').innerHTML + delLink;
 
     document.getElementById('newlink').appendChild(div1);
-    
+
     var genericExamples = document.querySelectorAll("[data-trigger]");
     Array.from(genericExamples).forEach(function (genericExamp) {
         var element = genericExamp;
@@ -174,14 +175,14 @@ function updatePassword(element) {
                 Toastify({
                     text: response.Message,
                     className: "success",
-                    duration: 3000    
+                    duration: 3000
                 }).showToast();
                 document.querySelector('#changePassword > form').reset();
             } else {
                 Toastify({
                     text: response.Message,
                     className: "danger",
-                    duration: 3000    
+                    duration: 3000
                 }).showToast();
             }
         }
